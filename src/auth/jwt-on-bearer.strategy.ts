@@ -9,8 +9,8 @@ import { jwtConstants } from './constants';
 export class JwtOnBearerStrategy extends PassportStrategy(Strategy, 'jwt-on-bearer') {
   constructor(private readonly authService: AuthService) {
     super({
-      jwtFromRequest: (req) =>
-        (req.jwt = (req.header('Authorization') || '').replace(/^Bearer\s+/, '')),
+      jwtFromRequest: (request) =>
+        (request.jwt = (request.header('Authorization') || '').replace(/^Bearer\s+/, '')),
       ignoreExpiration: false,
       secretOrKey: jwtConstants.publicKey,
     });

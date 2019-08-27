@@ -16,13 +16,13 @@ export class AuthController {
 
   @UseGuards(AuthGuard('jwt-on-bearer'))
   @Post('signin/jwt')
-  async postSigninJwt(@Request() req, @Response() res) {
-    if (req.header('Origin') !== `https://${jwtConstants.kerberosDomain}`) {
+  async postSigninJwt(@Request() request, @Response() res) {
+    if (request.header('Origin') !== `https://${jwtConstants.kerberosDomain}`) {
       throw new UnauthorizedException();
     }
 
-    const { exp } = req.user.payload;
-    res.cookie(jwtConstants.cookieName, req.jwt, {
+    const { exp } = request.user.payload;
+    res.cookie(jwtConstants.cookieName, request.jwt, {
       domain: '',
       expires: new Date(exp * 1000),
       httpOnly: false,

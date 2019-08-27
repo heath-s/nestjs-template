@@ -9,8 +9,8 @@ import { jwtConstants } from './constants';
 export class JwtOnCookieStrategy extends PassportStrategy(Strategy, 'jwt-on-cookie') {
   constructor(private readonly authService: AuthService) {
     super({
-      jwtFromRequest: (req) =>
-        (req && req.cookies && req.cookies[jwtConstants.cookieName]) || null,
+      jwtFromRequest: (request) =>
+        (request && request.cookies && request.cookies[jwtConstants.cookieName]) || null,
       ignoreExpiration: false,
       secretOrKey: jwtConstants.publicKey,
     });
