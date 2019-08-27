@@ -1,8 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Request } from 'express';
 
-// const IS_TEST = process.env.NODE_ENV === 'test';
-const IS_TEST = true;
+const IS_TEST = process.env.NODE_ENV === 'test';
 
 @Injectable()
 export class AuditLogService {
@@ -32,74 +31,14 @@ export class AuditLogService {
     return {
       context,
       request: {
-
+        body: request.body,
+        headers: request.headers,
+        ip: request.ip,
+        user: (request.user as any).user,
       },
-      error,
+      error: error ?
+        { message: error.message, stack: error.stack } :
+        undefined,
     };
   }
 }
-
-/*
-from osiris
-module.exports = (sequelize, DataTypes) => {
-  const Log = sequelize.define('Log', {
-    error: {
-      allowNull: true,
-      type: DataTypes.JSON
-    },
-    reqTag: {
-      allowNull: false,
-      defaultValue: '',
-      type: DataTypes.STRING
-    },
-    request: {
-      allowNull: false,
-      defaultValue: {},
-      type: DataTypes.JSON
-    },
-    username: {
-      allowNull: false,
-      defaultValue: '',
-      type: DataTypes.STRING
-    },
-    userNickname: {
-      allowNull: false,
-      defaultValue: '',
-      type: DataTypes.STRING
-    }
-  }, {
-    updatedAt: false,
-    indexes: [{ fields: ['reqTag'] }, { fields: ['username'] }, { fields: ['userNickname'] }]
-  });
-  Log.associate = function(models) {
-    // associations can be defined here
-  };
-
-  // Class methods
-  Log.saveItem = async (req, error) => {
-    if (process.env.NODE_ENV === 'test') {
-      return;
-    }
-
-    if (error && error instanceof Error) {
-      error = {
-        message: error.message.toString(),
-        stack: error.stack.toString()
-      };
-    }
-    const { userId: username, username: userNickname } = req.user;
-    const reqTag = req.tag;
-    const request = {
-      body: req.body,
-      endpoint: `${req.method} ${req.originalUrl}`,
-      headers: req.headers,
-      ip: req.ip,
-      user: req.user
-    };
-
-    return await Log.create({ error, username, userNickname, reqTag, request });
-  };
-
-  return Log;
-};
-*/
