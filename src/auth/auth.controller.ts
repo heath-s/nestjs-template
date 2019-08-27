@@ -1,9 +1,11 @@
 import { AuthGuard } from '@nestjs/passport';
-import { Controller, Get, Post, Request, Response, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Request, Response, UnauthorizedException, UseGuards, UseFilters } from '@nestjs/common';
 
 import { jwtConstants } from './constants';
 import { User } from './user.decorator';
+import { AuthExceptionFilter } from './auth-exception.filter';
 
+@UseFilters(AuthExceptionFilter)
 @Controller('auth')
 export class AuthController {
   @UseGuards(AuthGuard('jwt-on-cookie'))

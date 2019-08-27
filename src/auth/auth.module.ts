@@ -6,6 +6,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtOnBearerStrategy } from './jwt-on-bearer.strategy';
 import { JwtOnCookieStrategy } from './jwt-on-cookie.strategy';
+import { RolesGuard } from './roles.guard';
 
 
 @Module({
@@ -20,9 +21,11 @@ import { JwtOnCookieStrategy } from './jwt-on-cookie.strategy';
     AuthService,
     JwtOnBearerStrategy,
     JwtOnCookieStrategy,
+    RolesGuard,
   ],
   exports: [
     AuthService,
+    RolesGuard,
   ],
 })
 export class AuthModule { }
