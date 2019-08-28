@@ -20,6 +20,7 @@ import DEFAULT_TYPEORM_OPTIONS from './default-typeorm-options';
       // synchronize: true,
       // entities: [],
     }),
+    TypeOrmModule.forFeature([AuditLog], 'AuditLogConnection'),
     AuditLogModule,
     AuthModule,
   ],
