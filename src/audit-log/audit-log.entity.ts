@@ -1,4 +1,4 @@
-import { Entity, Column, Index, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+import { Entity, Column, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class AuditLog {
@@ -24,11 +24,9 @@ export class AuditLog {
   username: string;
 
   @Index()
-  @Column('timestamp')
+  @Column({
+    type: 'datetime',
+    default: () => 'NOW()',
+  })
   createdAt: Date;
-
-  @BeforeInsert()
-  setCreatedAt() {
-    this.createdAt = new Date();
-  }
 }
