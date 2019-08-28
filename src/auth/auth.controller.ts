@@ -1,9 +1,9 @@
 import { AuthGuard } from '@nestjs/passport';
 import { Controller, Get, Post, Request, Response, UnauthorizedException, UseGuards, UseFilters } from '@nestjs/common';
 
-import { jwtConstants } from './constants';
-import { User } from './user.decorator';
 import { AuthExceptionFilter } from './auth-exception.filter';
+import CONSTANTS from './constants';
+import { User } from './user.decorator';
 
 @UseFilters(AuthExceptionFilter)
 @Controller('auth')
@@ -17,12 +17,12 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt-on-bearer'))
   @Post('signin/jwt')
   async postSigninJwt(@Request() request, @Response() res) {
-    if (request.header('Origin') !== `https://${jwtConstants.kerberosDomain}`) {
+    if (request.header('Origin') !== `https://${CONSTANTS.KERBEROS_DOMAIN}`) {
       throw new UnauthorizedException();
     }
 
     const { exp } = request.user.payload;
-    res.cookie(jwtConstants.cookieName, request.jwt, {
+    res.cookie(CONSTANTS.COOKIE_NAME, request.jwt, {
       domain: '',
       expires: new Date(exp * 1000),
       httpOnly: false,

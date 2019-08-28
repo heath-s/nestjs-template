@@ -1,7 +1,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter, ForbiddenException, UnauthorizedException } from '@nestjs/common';
 import { Response } from 'express';
 
-import { jwtConstants } from './constants';
+import CONSTANTS from './constants';
 
 @Catch(UnauthorizedException, ForbiddenException)
 export class AuthExceptionFilter implements ExceptionFilter {
@@ -12,7 +12,7 @@ export class AuthExceptionFilter implements ExceptionFilter {
 
     res
       .status(status)
-      .clearCookie(jwtConstants.cookieName)
+      .clearCookie(CONSTANTS.COOKIE_NAME)
       .send(exception.message);
   }
 }

@@ -3,16 +3,16 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-jwt';
 
 import { AuthService } from './auth.service';
-import { jwtConstants } from './constants';
+import CONSTANTS from './constants';
 
 @Injectable()
 export class JwtOnCookieStrategy extends PassportStrategy(Strategy, 'jwt-on-cookie') {
   constructor(private readonly authService: AuthService) {
     super({
       jwtFromRequest: (request) =>
-        (request && request.cookies && request.cookies[jwtConstants.cookieName]) || null,
+        (request && request.cookies && request.cookies[CONSTANTS.COOKIE_NAME]) || null,
       ignoreExpiration: false,
-      secretOrKey: jwtConstants.publicKey,
+      secretOrKey: CONSTANTS.PUBLIC_KEY,
     });
   }
 

@@ -1,7 +1,7 @@
-export const jwtConstants = {
-  cookieName: 'JWTSecuritySystemTeam',
-  kerberosDomain: 'kerberos.ncsoft.com',
-  publicKey: `
+export default {
+  COOKIE_NAME: 'JWTSecuritySystemTeam',
+  KERBEROS_DOMAIN: 'kerberos.ncsoft.com',
+  PUBLIC_KEY: `
 -----BEGIN PUBLIC KEY-----
 MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqvODgLG7kIHfzim/5wKW
 G7HnImUAb7/ylyfuYqY2zB5HHkzneiDc9b3IDsc0vnP+/fMG5YXAv4vaXGWxaZhX
@@ -18,5 +18,5 @@ iuzqXiGtMEmaqU5Mspx76gcCAwEAAQ==
 -----END PUBLIC KEY-----
   `,
   // TODO: JWT Service Name
-  serviceName: 'SERVICE_NAME',
+  SERVICE_NAME: 'SERVICE_NAME',
 };

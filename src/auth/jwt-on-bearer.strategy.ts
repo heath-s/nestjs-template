@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-jwt';
 
 import { AuthService } from './auth.service';
-import { jwtConstants } from './constants';
+import CONSTANTS from './constants';
 
 @Injectable()
 export class JwtOnBearerStrategy extends PassportStrategy(Strategy, 'jwt-on-bearer') {
@@ -12,7 +12,7 @@ export class JwtOnBearerStrategy extends PassportStrategy(Strategy, 'jwt-on-bear
       jwtFromRequest: (request) =>
         (request.jwt = (request.header('Authorization') || '').replace(/^Bearer\s+/, '')),
       ignoreExpiration: false,
-      secretOrKey: jwtConstants.publicKey,
+      secretOrKey: CONSTANTS.PUBLIC_KEY,
     });
   }
 
