@@ -5,7 +5,7 @@ import { Like, Repository } from 'typeorm';
 import { AuditLog } from './audit-log.entity';
 import { Pagination } from '../shared/pagination.decorator';
 
-@Controller('audit-log')
+@Controller('audit-logs')
 export class AuditLogController {
   constructor(
     @InjectRepository(AuditLog, 'AuditLogConnection')
