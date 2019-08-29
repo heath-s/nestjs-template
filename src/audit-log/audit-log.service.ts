@@ -56,6 +56,7 @@ export class AuditLogService {
       endpoint: `${request.method} ${request.originalUrl}`,
       headers: request.headers,
       ip: request.ip,
+      query: request.query,
       user,
     };
     auditLog.username = user.userId;
