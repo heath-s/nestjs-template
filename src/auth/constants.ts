@@ -1,5 +1,6 @@
 export default {
-  COOKIE_NAME: 'JWTSecuritySystemTeam',
+  // TODO: Cookie Name
+  COOKIE_NAME: 'COOKIE_NAME',
   KERBEROS_DOMAIN: 'kerberos.ncsoft.com',
   // TODO: JWT Encryption Public Key
   PUBLIC_KEY: 'PUBLIC_KEY',
