@@ -27,13 +27,13 @@ export class AuditLogController {
       where[by] = by === 'nickname' ? Like(`%${keyword}%`) : keyword;
     }
 
-    const [logs, count] = await this.auditLogRepo.findAndCount({
-      select: ['id', 'context', 'error', 'nickname', 'username', 'createdAt'],
+    const [auditLogs, count] = await this.auditLogRepo.findAndCount({
+      select: ['id', 'context', 'error', 'nickname', 'request', 'username', 'createdAt'],
       where,
       order: { createdAt: 'DESC' },
       skip,
       take,
     });
-    return { count, logs };
+    return { count, auditLogs };
   }
 }
