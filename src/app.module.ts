@@ -41,7 +41,7 @@ export class AppModule implements NestModule {
       }))
       .forRoutes(
         { path: 'auth/signin/jwt', method: RequestMethod.OPTIONS },
-        { path: 'auth/signin/jwt', method: RequestMethod.GET },
+        { path: 'auth/signin/jwt', method: RequestMethod.POST },
       );
   }
 }
