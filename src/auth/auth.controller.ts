@@ -1,5 +1,5 @@
 import { AuthGuard } from '@nestjs/passport';
-import { Controller, Get, Post, Request, Response, UnauthorizedException, UseGuards, UseFilters } from '@nestjs/common';
+import { Controller, ForbiddenException, Get, Post, Request, Response, UseGuards, UseFilters } from '@nestjs/common';
 
 import { AuthExceptionFilter } from './auth-exception.filter';
 import CONSTANTS from './constants';
@@ -18,7 +18,7 @@ export class AuthController {
   @Post('signin/jwt')
   async postSigninJwt(@Request() request, @Response() res) {
     if (request.get('Origin') !== `https://${CONSTANTS.KERBEROS_DOMAIN}`) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     const { exp } = request.user.payload;
