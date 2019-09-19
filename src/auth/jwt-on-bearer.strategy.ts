@@ -10,7 +10,7 @@ export class JwtOnBearerStrategy extends PassportStrategy(Strategy, 'jwt-on-bear
   constructor(private readonly authService: AuthService) {
     super({
       jwtFromRequest: (request) =>
-        (request.jwt = (request.header('Authorization') || '').replace(/^Bearer\s+/, '')),
+        (request.jwt = (request.get('Authorization') || '').replace(/^Bearer\s+/, '')),
       ignoreExpiration: false,
       secretOrKey: CONSTANTS.PUBLIC_KEY,
     });
