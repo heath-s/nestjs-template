@@ -17,7 +17,7 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt-on-bearer'))
   @Post('signin/jwt')
   async postSigninJwt(@Request() request, @Response() res) {
-    if (request.header('Origin') !== `https://${CONSTANTS.KERBEROS_DOMAIN}`) {
+    if (request.get('Origin') !== `https://${CONSTANTS.KERBEROS_DOMAIN}`) {
       throw new UnauthorizedException();
     }
 
