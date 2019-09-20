@@ -16,13 +16,13 @@ export class AuthController {
 
   @UseGuards(AuthGuard('jwt-on-bearer'))
   @Post('signin/jwt')
-  async postSigninJwt(@Request() request, @Response() res) {
-    if (request.get('Origin') !== `https://${CONSTANTS.KERBEROS_DOMAIN}`) {
+  async postSigninJwt(@Request() request, @Response() response) {
+    if (request.header('Origin') !== `https://${CONSTANTS.KERBEROS_DOMAIN}`) {
       throw new ForbiddenException();
     }
 
     const { exp } = request.user.payload;
-    res.cookie(CONSTANTS.COOKIE_NAME, request.jwt, {
+    response.cookie(CONSTANTS.COOKIE_NAME, request.jwt, {
       domain: '',
       expires: new Date(exp * 1000),
       httpOnly: false,
@@ -31,6 +31,6 @@ export class AuthController {
       signed: false,
     });
 
-    return res.status(200).send({ status: 200 });
+    return response.status(200).send({ status: 200 });
   }
 }
