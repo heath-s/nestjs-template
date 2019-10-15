@@ -6,6 +6,7 @@ export const Pagination = createParamDecorator((lim: number, request) => {
   page = Math.max(1, Math.ceil(+page));
 
   return {
+    page,
     skip: (page - 1) * limit,
     take: limit,
   };
