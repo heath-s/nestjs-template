@@ -9,14 +9,14 @@ export class AuditLog {
   @Column({ default: '' })
   context: string;
 
-  @Column('json', { nullable: true })
+  @Column('simple-json', { nullable: true })
   error?: any;
 
   @Index()
   @Column({ default: '' })
   nickname: string;
 
-  @Column('json')
+  @Column('simple-json')
   request: any;
 
   @Index()
